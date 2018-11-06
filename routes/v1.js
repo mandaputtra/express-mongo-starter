@@ -5,6 +5,8 @@ const router = express.Router();
 
 const UserController = require('../controllers/user.controller');
 const HomeController = require('../controllers/home.controller');
+const BlogPostController = require('../controllers/blogpost.controller');
+
 
 const custom = require('./../middleware/custom');
 
@@ -23,7 +25,9 @@ router.put('/users', passport.authenticate('jwt', { session:false }), UserContro
 router.delete('/users', passport.authenticate('jwt', { session:false }), UserController.remove);  // D
 router.post('/users/login', UserController.login);
 
-router.get('/dash', passport.authenticate('jwt', {session:false}),HomeController.Dashboard);
+router.post('/blogpost', passport.authenticate('jwt', { session:false }), BlogPostController.create); // C
+
+router.get('/dash', passport.authenticate('jwt', {session:false}), HomeController.Dashboard);
 
 
 //********* API DOCUMENTATION **********
