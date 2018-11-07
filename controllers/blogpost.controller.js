@@ -71,7 +71,7 @@ const update = async (req, res) => {
 
   // Sentback the blogpost that are updated
   [err, blogpost] = await to(Blogpost.findOne({ _id: blogpost }));
-  if(err) return ReE(res, err, 422)
+  if(err) return ReE(res, err, 422);
 
   return ReS(res, {
     message: "Success updating blogpost",
@@ -79,3 +79,18 @@ const update = async (req, res) => {
   }, 200);
 };
 module.exports.update = update;
+
+const deleteById = async (req, res) => {
+  res.setHeader("Content-Type", "application/json");
+
+  let err, blogpost, blogpostId;
+
+  blogpostId = req.params.blogpostId;
+
+  [err, blogpost] = await to(Blogpost.deleteOne({ _id: blogpostId }));
+  if(err) return ReE(res, err, 422);
+
+  return ReS(res, { message: "Success deleting article"});
+
+}
+module.exports.deleteById = deleteById;

@@ -5,7 +5,7 @@ const {TE, to} = require('../services/util.service');
 let BlogPostSchema = mongoose.Schema({
   title: { type: String, required:true },
   author: { type: mongoose.Schema.ObjectId, ref : 'User' },
-  categories: { type: String },
+  categories: [ { type: String } ],
   comment: [
     {
       commentAuthor: { type: mongoose.Schema.ObjectId, ref : 'User' },
