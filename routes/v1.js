@@ -26,6 +26,10 @@ router.delete('/users', passport.authenticate('jwt', { session:false }), UserCon
 router.post('/users/login', UserController.login);
 
 router.post('/blogpost', passport.authenticate('jwt', { session:false }), BlogPostController.create); // C
+router.get('/blogpost', passport.authenticate('jwt', { session:false }), BlogPostController.getAll); // R
+router.get('/blogpost/:blogpostId', passport.authenticate('jwt', { session:false }), BlogPostController.get); // R
+router.put('/blogpost/:blogpostId', passport.authenticate('jwt', { session:false }), custom.blogpostAuthor, BlogPostController.update); // U
+
 
 router.get('/dash', passport.authenticate('jwt', {session:false}), HomeController.Dashboard);
 
