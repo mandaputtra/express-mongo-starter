@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(passport.initialize());
 
 //Log Env
-consola.info("Environment:", CONFIG.app)
+consola.success("Environment:", CONFIG.app)
 //DATABASE
 const models = require("./models");
 

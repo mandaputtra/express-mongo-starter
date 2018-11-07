@@ -89,6 +89,6 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 
-  consola.info('Server listenning on port:', addr.port);
+  consola.success('Server listenning on port:', addr.port);
 
 }

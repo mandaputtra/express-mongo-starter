@@ -1,4 +1,4 @@
-const { User } = require("../models");
+const { User, Blogpost } = require("../models");
 const authService = require("../services/auth.service");
 const { to, ReE, ReS } = require("../services/util.service");
 const consola = require('consola')
@@ -87,3 +87,20 @@ const login = async function(req, res) {
   return ReS(res, { token: user.getJWT(), user: user.toWeb() });
 };
 module.exports.login = login;
+
+const getUserAndBlogPost = async (req, res) => {
+  let err, user, blogpost;
+
+  [err, user] = await to(User.findOne({ _id: req.params.id }));
+  if(err) return ReE(res, err, 422);
+
+  [err, blogpost] = await to(Blogpost.find({ author: user._id }));
+  if(err) return ReE(res, "This user doesnt had any blog post yet");
+
+  return ReS(res, {
+    message: "Success finding user with blogpost",
+    user: user,
+    blogpost: blogpost
+  })
+}
+module.exports.getUserAndBlogPost = getUserAndBlogPost;

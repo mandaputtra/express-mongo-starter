@@ -22,13 +22,13 @@ if(CONFIG.db_host != ''){
     const mongo_location = 'mongodb://'+CONFIG.db_host+':'+CONFIG.db_port+'/'+CONFIG.db_name;
 
     mongoose.connect(mongo_location, { useNewUrlParser: true }).catch((err)=>{
-        consola.info('*** Can Not Connect to Mongo Server:', mongo_location)
+        consola.fatal('*** Can`t Not Connect to Mongo Server:', mongo_location)
     })
 
     let db = mongoose.connection;
     module.exports = db;
     db.once('open', ()=>{
-        consola.info('Connected to mongo at '+mongo_location);
+        consola.success('Connected to mongo at '+mongo_location);
     })
     db.on('error', (error)=>{
         consola.fatal("error", error);

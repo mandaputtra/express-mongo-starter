@@ -91,6 +91,5 @@ const deleteById = async (req, res) => {
   if(err) return ReE(res, err, 422);
 
   return ReS(res, { message: "Success deleting article"});
-
 }
 module.exports.deleteById = deleteById;

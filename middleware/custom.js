@@ -1,29 +1,5 @@
-// const Company = require("../models/company.model");
-const { Blogpost } = require("../models");
+const { User, Blogpost } = require("../models");
 const { to, ReE, ReS } = require("../services/util.service");
-
-// let company = async function(req, res, next) {
-//   let company_id, err, company;
-//   company_id = req.params.company_id;
-
-//   [err, company] = await to(Company.findOne({ _id: company_id }));
-//   if (err) return ReE(res, "err finding company");
-
-//   if (!company) return ReE(res, "Company not found with id: " + company_id);
-//   let user, users_array;
-//   user = req.user;
-//   users_array = company.users.map(obj => String(obj.user));
-
-//   if (!users_array.includes(String(user._id)))
-//     return ReE(
-//       res,
-//       "User does not have permission to read app with id: " + app_id
-//     );
-
-//   req.company = company;
-//   next();
-// };
-// module.exports.company = company;
 
 let blogpostAuthor = async (req, res, next) => {
   let blogpostId, err, blogpost;
@@ -47,3 +23,20 @@ let blogpostAuthor = async (req, res, next) => {
   next()
 }
 module.exports.blogpostAuthor = blogpostAuthor;
+
+let isLogedInUser = async (req, res, next) => {
+  let err, user;
+
+  [err, user] = await to(User.findOne({ _id: req.user._id }));
+  if(err) return ReE(res, "error user not found");
+
+  if(!user) return ReE(res, "User not found");
+
+  userLogin = req.user._id;
+  if(userLogin.toString() != user._id.toString())
+    return ReE(res, "you dont had permission to update");
+
+  req.user = user;
+  next();
+}
+module.exports.isLogedInUser = isLogedInUser;
