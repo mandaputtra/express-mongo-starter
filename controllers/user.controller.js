@@ -104,3 +104,22 @@ const getUserAndBlogPost = async (req, res) => {
   })
 }
 module.exports.getUserAndBlogPost = getUserAndBlogPost;
+
+const getUserAndBlogPostTest = async (req, res) => {
+  let err, blogpost;
+
+  // [err, user] = await to(User.findOne({ _id: req.params.id }));
+  // if(err) return ReE(res, err, 422);
+
+  [err, blogpost] = await to(Blogpost.findOne({ title: "Laravel" })
+    .populate('author'));
+  if(err) return ReE(res, "This user doesnt had any blog post yet");
+
+  if(!blogpost) return ReE(res, "This user doesnt had any blog post yet");
+
+  return ReS(res, {
+    message: "Success finding user with blogpost",
+    blogpost: blogpost
+  })
+}
+module.exports.getUserAndBlogPostTest = getUserAndBlogPostTest;

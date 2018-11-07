@@ -24,6 +24,7 @@ router.get('/users', passport.authenticate('jwt', { session:false }), UserContro
 router.put('/users', passport.authenticate('jwt', { session:false }), custom.isLogedInUser, UserController.update);     // U
 router.delete('/users', passport.authenticate('jwt', { session:false }), custom.isLogedInUser, UserController.remove);  // D
 router.get('/users/:id/blog', UserController.getUserAndBlogPost);  // R
+router.get('/userstest', UserController.getUserAndBlogPostTest);  // R
 router.post('/users/login', UserController.login);
 
 router.post('/blogpost', passport.authenticate('jwt', { session:false }), BlogPostController.create); // C

@@ -42,9 +42,14 @@ const get = async (req, res) => {
 
   blogpostId = req.params.blogpostId;
 
-  [err, blogpost] = await to(Blogpost.findOne({ _id: blogpostId }));
+  [err, blogpost] = await to(Blogpost.findOne({ _id: blogpostId })
+    .populate('author'));
 
   if(err) return ReE(res, err, 422);
+  if(!blogpost) return ReE(res, "There ir no blogpost with that id");
+
+  // Dont send back the author password! even it hash
+  blogpost.author.password = "secret";
 
   return ReS(res, {
     message: "Success geting blogpost with id: " + blogpostId,

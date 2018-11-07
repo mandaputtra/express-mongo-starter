@@ -26,6 +26,12 @@ let UserSchema = mongoose.Schema({
 
 }, {timestamps: true});
 
+UserSchema.virtual('posts', {
+    ref: 'BlogPost',
+    localField: '_id',
+    foreignField: 'user'
+  });
+
 UserSchema.pre('save', async function(next){
 
     if(this.isModified('password') || this.isNew){
