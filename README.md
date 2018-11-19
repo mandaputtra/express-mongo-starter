@@ -32,5 +32,5 @@ Fill in the variables to fit your application
 - [x] Auth Login
 - [x] User CRUD
 - [x] Dashboard Api
-- [] Blog Post CRUD
+- [x] Blog Post CRUD
 - [] User Permission CRUD
