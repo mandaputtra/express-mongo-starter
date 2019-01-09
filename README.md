@@ -34,3 +34,7 @@ Fill in the variables to fit your application
 - [x] Dashboard Api
 - [x] Blog Post CRUD
 - [x] User Permission CRUD
+- [ ] Add Redis Session
+- [ ] Add socket-io/websocket intregation
+- [ ] Docker it up?
+- [ ] Get some comments on code...
